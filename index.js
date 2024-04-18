@@ -31,7 +31,8 @@ const elements = {
   showSideBarBtn: document.getElementById('show-side-bar-btn'),
   themeSwitch: document.getElementById('switch'),
   createNewTaskBtn: document.getElementById('add-new-task-btn'),
-  modalWindow: document.getElementById('new-task-modal-window')
+  modalWindow: document.getElementById('new-task-modal-window'),
+  columnDivs: document.querySelectorAll('column-div'),
 };
 
 let activeBoard = "";
@@ -122,7 +123,7 @@ function styleActiveBoard(boardName) {
       btn.remove("active");
     }
   });
-}
+};
 
 function addTaskToUI(task) {
   const column = document.querySelector(
@@ -223,8 +224,12 @@ function openEditTaskModal(task) {
   // Set task details in modal inputs
 
   // Get button elements from the task modal
-
+document.getElementById('create-task-btn').addEventListener('click', () => {
+  document.getElementById('new-task-modal-window').style.display = 'block';
+  // createNewTask();
+})
   // Call saveTaskChanges upon click of Save Changes button
+  
 
   // Delete task using a helper function and close the task modal
 
