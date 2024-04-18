@@ -247,11 +247,15 @@ const editSelectStatus = document.getElementById('edit-select-status').value
 const editTaskTitleInput = document.getElementById('edit-task-title-input').value
 const editTaskDescInput = document.getElementById('edit-task-desc-input').value
   // Create an object with the updated task details
-
+const task = {
+  Status:editSelectStatus,
+  Input:editTaskDescInput,
+  Title:editTaskTitleInput
+};
   // Update task using a helper function
-
+  patchTask(task)
   // Close the modal and refresh the UI to reflect the changes
-
+  toggleModal(false, elements.editTaskModal);
   refreshTasksUI();
 }
 
