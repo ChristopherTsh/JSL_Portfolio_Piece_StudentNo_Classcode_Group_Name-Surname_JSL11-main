@@ -243,7 +243,9 @@ deleteTaskBtn = document.getElementById('delete-task-btn');
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
-
+const editSelectStatus = document.getElementById('edit-select-status').value 
+const editTaskTitleInput = document.getElementById('edit-task-title-input').value
+const editTaskDescInput = document.getElementById('edit-task-desc-input').value
   // Create an object with the updated task details
 
   // Update task using a helper function
