@@ -234,6 +234,9 @@ deleteTaskBtn = document.getElementById('delete-task-btn');
   
 
   // Delete task using a helper function and close the task modal
+  deleteTaskBtn.addEventListener('click', () => {
+    deleteTask(task.id);
+  })
 
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
