@@ -127,6 +127,7 @@ function styleActiveBoard(boardName) {
 };
 
 function addTaskToUI(task) {
+  console.log(task)
   const column = document.querySelector(
     `.column-div[data-status="${task.status}"]`
   );
@@ -206,7 +207,11 @@ function addTask(event) {
   event.preventDefault();
 
   //Assign user input to the task object
-  const task = {};
+  const task = {
+    title: document.getElementById('title-input').value ,
+    description:  document.getElementById('desc-input').value,
+    status: document.getElementById('modal-select-status').value 
+  };
   const newTask = createNewTask(task);
   if (newTask) {
     addTaskToUI(newTask);
@@ -275,6 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function init() {
+  initializeData()
   setupEventListeners();
   const showSidebar = localStorage.getItem("showSideBar") === "true";
   toggleSidebar(showSidebar);
