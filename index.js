@@ -151,7 +151,7 @@ function addTaskToUI(task) {
   taskElement.textContent = task.title; // Modify as needed
   taskElement.setAttribute("data-task-id", task.id);
 
-  tasksContainer.appendChild();
+  tasksContainer.appendChild(taskElement);
 }
 
 function setupEventListeners() {
@@ -210,7 +210,7 @@ function addTask(event) {
   const task = {
     title: document.getElementById('title-input').value ,
     description:  document.getElementById('desc-input').value,
-    status: document.getElementById('modal-select-status').value 
+    status: document.getElementById('select-status').value 
   };
   const newTask = createNewTask(task);
   if (newTask) {
