@@ -32,7 +32,7 @@ const elements = {
   themeSwitch: document.getElementById("switch"),
   createNewTaskBtn: document.getElementById("add-new-task-btn"),
   modalWindow: document.getElementById("new-task-modal-window"),
-  columnDivs: document.querySelectorAll("column-div"),
+  columnDivs: document.querySelectorAll(".column-div"),
   headerBoardName: document.getElementById('header-board-name')
 };
 
