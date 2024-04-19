@@ -254,6 +254,8 @@ toggleModal(true, elements.editTaskModal); // Show the edit task modal
   // Delete task using a helper function and close the task modal
   deleteTaskBtn.addEventListener("click", () => {
     deleteTask(task.id);
+    toggleModal(false, elements.editTaskModal);
+    refreshTasksUI();
   });
 }
 
