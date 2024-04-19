@@ -33,7 +33,8 @@ const elements = {
   createNewTaskBtn: document.getElementById("add-new-task-btn"),
   modalWindow: document.getElementById("new-task-modal-window"),
   columnDivs: document.querySelectorAll(".column-div"),
-  headerBoardName: document.getElementById('header-board-name')
+  headerBoardName: document.getElementById('header-board-name'),
+  editTaskModal: document.getElementsByClassName('edit-task-modal-window')[0],
 };
 
 let activeBoard = "";
@@ -228,9 +229,19 @@ function toggleTheme() {}
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-const editTaskTitleInput = document.getElementById('edit-task-title-input')
-editTaskDescInput = document.getElementById('edit-task-desc-input')
-editSelectStatus = document.getElementById('edit-select-status')
+const editTaskTitleInput = document.getElementById('edit-task-title-input'),
+editTaskDescInput = document.getElementById('edit-task-desc-input'),
+editSelectStatus = document.getElementById('edit-select-status');
+
+editTaskTitleInput.value = task.title; 
+editTaskDescInput.value = task.description;
+const selectStatus = editSelectStatus.querySelector(`option[value="${task.status}"]`);
+selectStatus.selected = true;
+
+console.log(elements.editTaskModal)
+
+toggleModal(true, elements.editTaskModal); // Show the edit task modal
+
   // Get button elements from the task modal
   const saveTaskBtn = document.getElementById("save-task-changes-btn"),
     deleteTaskBtn = document.getElementById("delete-task-btn");
@@ -244,9 +255,6 @@ editSelectStatus = document.getElementById('edit-select-status')
   deleteTaskBtn.addEventListener("click", () => {
     deleteTask(task.id);
   });
-    
-
-  toggleModal(true, elements.editTaskModal); // Show the edit task modal
 }
 
 function saveTaskChanges(taskId) {
