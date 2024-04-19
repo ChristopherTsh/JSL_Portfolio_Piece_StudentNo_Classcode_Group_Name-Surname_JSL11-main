@@ -33,7 +33,7 @@ const elements = {
   createNewTaskBtn: document.getElementById("add-new-task-btn"),
   modalWindow: document.getElementById("new-task-modal-window"),
   columnDivs: document.querySelectorAll("column-div"),
-  headerBoardName: document.getElementById()
+  // headerBoardName: document.getElementById()
 };
 
 let activeBoard = "";
@@ -118,13 +118,13 @@ function refreshTasksUI() {
 // TASK: Fix Bugs
 function styleActiveBoard(boardName) {
   document.querySelectorAll(".board-btn").forEach((btn) => {
-    if (btn.textContent === boardName) {
+    if (btn.textContent = boardName) {
       btn.add("active");
     } else {
       btn.remove("active");
     }
   });
-}
+};
 
 function addTaskToUI(task) {
   const column = document.querySelector(
@@ -190,7 +190,7 @@ function setupEventListeners() {
   elements.modalWindow.addEventListener("submit", (event) => {
     addTask(event);
   });
-}
+};
 
 // Toggles tasks modal
 // Task: Fix bugs
