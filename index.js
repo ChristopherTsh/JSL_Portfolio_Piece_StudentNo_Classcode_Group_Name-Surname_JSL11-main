@@ -223,9 +223,19 @@ function addTask(event) {
   }
 }
 
-function toggleSidebar(show) {}
+function toggleSidebar(show) {
+const showSideBarBtn = document.getElementById('show-side-bar-btn');
 
-function toggleTheme() {}
+showSideBarBtn.addEventListener('click', () => {
+  toggleTheme(showSideBarBtn, show)
+});
+
+ toggleTheme(showSideBarBtn, show)
+}
+
+function toggleTheme(showSideBarBtn, show) {
+   showSideBarBtn.style.display = show? "block" : "none";
+}
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
