@@ -224,21 +224,34 @@ function addTask(event) {
 }
 
 function toggleSidebar(show) {
+  console.log(show)
 const showSideBarBtn = document.getElementById('show-side-bar-btn');
 
 showSideBarBtn.addEventListener('click', () => {
   // toggleTheme(showSideBarBtn, show)
   const sidebar = document.getElementById('side-bar-div');
   sidebar.style.display = show ? "block" : "none";
-
+  showSideBarBtn.style.display = show ? "none" : "block";
 });
 
- toggleTheme(showSideBarBtn, show)
+const hideSideBarBtn = document.getElementById('hide-side-bar-btn');
+
+hideSideBarBtn.addEventListener('click', () => {
+
+  const sidebar = document.getElementById('side-bar-div');
+  sidebar.style.display = show ? "none" : "block";
+  showSideBarBtn.style.display = show ? "block" : "none";
+})
+
+//  toggleTheme(showSideBarBtn, show)
 }
 
-function toggleTheme(showSideBarBtn, show) {
-   showSideBarBtn.style.display = show ? "block" : "none";
+function toggleTheme(show) {
+  const isLightTheme = show === "enabled";
+  document.body.classList.toggle("light-theme", isLightTheme);
+  localStorage.setItem("light-theme", isLightTheme ? "enabled" : "disabled");
 }
+
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
@@ -306,8 +319,9 @@ function init() {
   initializeData();
   setupEventListeners();
   const showSidebar = localStorage.getItem("showSideBar") === "true";
+  elements.showSideBarBtn.style.display = showSidebar ? "block" : "none";
   toggleSidebar(showSidebar);
   const isLightTheme = localStorage.getItem("light-theme") === "enabled";
-  document.body.classList.toggle("light-theme", isLightTheme);
+  toggleTheme(isLightTheme);
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
