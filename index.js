@@ -227,14 +227,17 @@ function toggleSidebar(show) {
 const showSideBarBtn = document.getElementById('show-side-bar-btn');
 
 showSideBarBtn.addEventListener('click', () => {
-  toggleTheme(showSideBarBtn, show)
+  // toggleTheme(showSideBarBtn, show)
+  const sidebar = document.getElementById('side-bar-div');
+  sidebar.style.display = show ? "block" : "none";
+
 });
 
  toggleTheme(showSideBarBtn, show)
 }
 
 function toggleTheme(showSideBarBtn, show) {
-   showSideBarBtn.style.display = show? "block" : "none";
+   showSideBarBtn.style.display = show ? "block" : "none";
 }
 
 function openEditTaskModal(task) {
