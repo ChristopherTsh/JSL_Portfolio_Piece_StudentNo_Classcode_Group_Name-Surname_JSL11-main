@@ -247,9 +247,10 @@ hideSideBarBtn.addEventListener('click', () => {
 }
 
 function toggleTheme(show) {
-  const isLightTheme = show === "enabled";
+  const isLightTheme = show === "enabled" || show === true || elements.themeSwitch.checked === true;
   document.body.classList.toggle("light-theme", isLightTheme);
-  localStorage.setItem("light-theme", isLightTheme ? "enabled" : "disabled");
+  localStorage.setItem("light-theme", (isLightTheme ? "enabled" : "disabled"));
+  console.log(localStorage.getItem("light-theme"))
 }
 
 
