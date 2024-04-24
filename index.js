@@ -35,8 +35,8 @@ const elements = {
   columnDivs: document.querySelectorAll(".column-div"),
   headerBoardName: document.getElementById("header-board-name"),
   editTaskModal: document.getElementsByClassName("edit-task-modal-window")[0],
-  threeDotsIcon: document.getElementById('three-dots-icon'),
-  logo:document.getElementById('logo')
+  threeDotsIcon: document.getElementById("three-dots-icon"),
+  logo: document.getElementById("logo"),
 };
 
 let activeBoard = "";
@@ -188,7 +188,7 @@ function setupEventListeners() {
     toggleModal(true);
     elements.filterDiv.style.display = "block"; // Also show the filter overlay
   });
-  elements.threeDotsIcon.addEventListener('click', () => {
+  elements.threeDotsIcon.addEventListener("click", () => {
     toggleModal(true);
     elements.filterDiv.style.display = "block";
   });
@@ -218,15 +218,17 @@ function addTask(event) {
     description: document.getElementById("desc-input").value,
     status: document.getElementById("select-status").value,
     board: activeBoard,
-
-    
-  }
-
-  if(task.title.trim() === '' || task.description.trim() === '' || task.status.trim() === ''){
-    alert('Please fill in all fields',)
-      
-   return;
   };
+
+  if (
+    task.title.trim() === "" ||
+    task.description.trim() === "" ||
+    task.status.trim() === ""
+  ) {
+    alert("Please fill in all fields");
+
+    return;
+  }
 
   const newTask = createNewTask(task);
   if (newTask) {
@@ -239,36 +241,39 @@ function addTask(event) {
 }
 
 function toggleSidebar(show) {
-  console.log(show)
-const showSideBarBtn = document.getElementById('show-side-bar-btn');
+  console.log(show);
+  const showSideBarBtn = document.getElementById("show-side-bar-btn");
 
-showSideBarBtn.addEventListener('click', () => {
-  // toggleTheme(showSideBarBtn, show)
-  const sidebar = document.getElementById('side-bar-div');
-  sidebar.style.display = show ? "block" : "none";
-  showSideBarBtn.style.display = show ? "none" : "block";
-});
+  showSideBarBtn.addEventListener("click", () => {
+    // toggleTheme(showSideBarBtn, show)
+    const sidebar = document.getElementById("side-bar-div");
+    sidebar.style.display = show ? "block" : "none";
+    showSideBarBtn.style.display = show ? "none" : "block";
+  });
 
-const hideSideBarBtn = document.getElementById('hide-side-bar-btn');
+  const hideSideBarBtn = document.getElementById("hide-side-bar-btn");
 
-hideSideBarBtn.addEventListener('click', () => {
+  hideSideBarBtn.addEventListener("click", () => {
+    const sidebar = document.getElementById("side-bar-div");
+    sidebar.style.display = show ? "none" : "block";
+    showSideBarBtn.style.display = show ? "block" : "none";
+  });
 
-  const sidebar = document.getElementById('side-bar-div');
-  sidebar.style.display = show ? "none" : "block";
-  showSideBarBtn.style.display = show ? "block" : "none";
-})
-
-//  toggleTheme(showSideBarBtn, show)
+  //  toggleTheme(showSideBarBtn, show)
 }
 
 function toggleTheme(show) {
-  const isLightTheme = show === "enabled" || show === true || elements.themeSwitch.checked === true;
+  const isLightTheme =
+    show === "enabled" ||
+    show === true ||
+    elements.themeSwitch.checked === true;
   document.body.classList.toggle("light-theme", isLightTheme);
-  localStorage.setItem("light-theme", (isLightTheme ? "enabled" : "disabled"));
+  localStorage.setItem("light-theme", isLightTheme ? "enabled" : "disabled");
   elements.themeSwitch.checked = isLightTheme;
-  elements.logo.src = elements.logo.src.replace(window.location.origin, '.').replace(isLightTheme ? 'dark' : 'light', isLightTheme ? 'light' : 'dark');
+  elements.logo.src = elements.logo.src
+    .replace(window.location.origin, ".")
+    .replace(isLightTheme ? "dark" : "light", isLightTheme ? "light" : "dark");
 }
-
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
@@ -307,41 +312,40 @@ function openEditTaskModal(task) {
 function saveTaskChanges(taskId) {
   // Get new user inputs
   const editSelectStatus = document.getElementById("edit-select-status").value;
-  const editTaskTitleInput = document.getElementById("edit-task-title-input").value;
-  const editTaskDescInput = document.getElementById("edit-task-desc-input").value;
+  const editTaskTitleInput = document.getElementById(
+    "edit-task-title-input"
+  ).value;
+  const editTaskDescInput = document.getElementById(
+    "edit-task-desc-input"
+  ).value;
   // Create an object with the updated task details
   const task = {
     status: editSelectStatus,
     input: editTaskDescInput,
-    title: editTaskTitleInput
-
-    
+    title: editTaskTitleInput,
   };
   // Update task using a helper function
   putTask(task);
   // Close the modal and refresh the UI to reflect the changes
   toggleModal(false, elements.editTaskModal);
   refreshTasksUI();
-};
+}
 
-// resizing function 
+// resizing function
 
 // Function to handle window resize event
 
 function handleResize() {
   const screenWidth = document.documentElement.clientWidth;
-  if (screenWidth <= parseFloat(896.800) && screenWidth){
-  document.getElementById('three-dots-icon').style.display = 'inline';
-  document.getElementById('add-new-task-btn').style.display = 'none';
-
-  } else if (screenWidth > parseFloat(896.81) && screenWidth){
-  document.getElementById('three-dots-icon').style.display = 'none';
-  document.getElementById('add-new-task-btn').style.display = 'block';
+  if (screenWidth <= parseFloat(896.8) && screenWidth) {
+    document.getElementById("three-dots-icon").style.display = "inline";
+    document.getElementById("add-new-task-btn").style.display = "none";
+  } else if (screenWidth > parseFloat(896.81) && screenWidth) {
+    document.getElementById("three-dots-icon").style.display = "none";
+    document.getElementById("add-new-task-btn").style.display = "block";
   }
 }
-window.addEventListener('resize', handleResize);  
-  
-
+window.addEventListener("resize", handleResize);
 
 /*************************************************************************************************************************************************/
 
@@ -361,5 +365,7 @@ function init() {
   elements.themeSwitch.checked = isLightTheme;
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
   elements.themeSwitch.checked = isLightTheme;
-  elements.logo.src = elements.logo.src.replace(window.location.origin, '.').replace(isLightTheme ? 'dark' : 'light', isLightTheme ? 'light' : 'dark');
+  elements.logo.src = elements.logo.src
+    .replace(window.location.origin, ".")
+    .replace(isLightTheme ? "dark" : "light", isLightTheme ? "light" : "dark");
 }
