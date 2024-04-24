@@ -35,6 +35,7 @@ const elements = {
   columnDivs: document.querySelectorAll(".column-div"),
   headerBoardName: document.getElementById("header-board-name"),
   editTaskModal: document.getElementsByClassName("edit-task-modal-window")[0],
+  threeDotsIcon: document.getElementById('three-dots-icon')
 };
 
 let activeBoard = "";
@@ -186,6 +187,10 @@ function setupEventListeners() {
     toggleModal(true);
     elements.filterDiv.style.display = "block"; // Also show the filter overlay
   });
+  elements.threeDotsIcon.addEventListener('click', () => {
+    toggleModal(true);
+    elements.filterDiv.style.display = "block";
+  });
 
   // Add new task form submission event listener
   elements.modalWindow.addEventListener("submit", (event) => {
@@ -291,12 +296,8 @@ function openEditTaskModal(task) {
 function saveTaskChanges(taskId) {
   // Get new user inputs
   const editSelectStatus = document.getElementById("edit-select-status").value;
-  const editTaskTitleInput = document.getElementById(
-    "edit-task-title-input"
-  ).value;
-  const editTaskDescInput = document.getElementById(
-    "edit-task-desc-input"
-  ).value;
+  const editTaskTitleInput = document.getElementById("edit-task-title-input").value;
+  const editTaskDescInput = document.getElementById("edit-task-desc-input").value;
   // Create an object with the updated task details
   const task = {
     status: editSelectStatus,
@@ -308,12 +309,32 @@ function saveTaskChanges(taskId) {
   // Close the modal and refresh the UI to reflect the changes
   toggleModal(false, elements.editTaskModal);
   refreshTasksUI();
+};
+
+// resizing function 
+
+// Function to handle window resize event
+
+function handleResize() {
+  const screenWidth = document.documentElement.clientWidth;
+  if (screenWidth <= parseFloat(896.800) && screenWidth){
+  document.getElementById('three-dots-icon').style.display = 'inline';
+  document.getElementById('add-new-task-btn').style.display = 'none';
+
+  } else if (screenWidth > parseFloat(896.81) && screenWidth){
+  document.getElementById('three-dots-icon').style.display = 'none';
+  document.getElementById('add-new-task-btn').style.display = 'block';
+  }
 }
+window.addEventListener('resize', handleResize);
+  
+
 
 /*************************************************************************************************************************************************/
 
 document.addEventListener("DOMContentLoaded", function () {
   init(); // init is called after the DOM is fully loaded
+  handleResize();
 });
 
 function init() {
