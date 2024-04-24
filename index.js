@@ -217,7 +217,16 @@ function addTask(event) {
     description: document.getElementById("desc-input").value,
     status: document.getElementById("select-status").value,
     board: activeBoard,
+
+    
+  }
+
+  if(task.title.trim() === '' || task.description.trim() === '' || task.status.trim() === ''){
+    alert('Please fill in all fields',)
+      
+   return;
   };
+
   const newTask = createNewTask(task);
   if (newTask) {
     addTaskToUI(newTask);
@@ -302,7 +311,9 @@ function saveTaskChanges(taskId) {
   const task = {
     status: editSelectStatus,
     input: editTaskDescInput,
-    title: editTaskTitleInput,
+    title: editTaskTitleInput
+
+    
   };
   // Update task using a helper function
   putTask(task);
@@ -326,7 +337,7 @@ function handleResize() {
   document.getElementById('add-new-task-btn').style.display = 'block';
   }
 }
-window.addEventListener('resize', handleResize);
+window.addEventListener('resize', handleResize);  
   
 
 
