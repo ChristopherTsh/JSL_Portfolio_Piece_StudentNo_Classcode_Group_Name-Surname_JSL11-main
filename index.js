@@ -36,7 +36,8 @@ const elements = {
   headerBoardName: document.getElementById("header-board-name"),
   editTaskModal: document.getElementsByClassName("edit-task-modal-window")[0],
   threeDotsIcon: document.getElementById('three-dots-icon'),
-  logo:document.getElementById('logo')
+  logo:document.getElementById('logo'),
+  sideBar: document.getElementById('side-bar-div')
 };
 
 let activeBoard = "";
@@ -241,13 +242,11 @@ function addTask(event) {
 function toggleSidebar(show) {
   console.log(show)
 const showSideBarBtn = document.getElementById('show-side-bar-btn');
+elements.sideBar.classList.toggle("show",show);
+localStorage.setItem("showSideBar", show)
 
-showSideBarBtn.addEventListener('click', () => {
-  // toggleTheme(showSideBarBtn, show)
-  const sidebar = document.getElementById('side-bar-div');
-  sidebar.style.display = show ? "block" : "none";
-  showSideBarBtn.style.display = show ? "none" : "block";
-});
+elements.sideBar.style.display = show ? "block" : "none";
+showSideBarBtn.style.display = show ? "none" : "block";
 
 const hideSideBarBtn = document.getElementById('hide-side-bar-btn');
 
