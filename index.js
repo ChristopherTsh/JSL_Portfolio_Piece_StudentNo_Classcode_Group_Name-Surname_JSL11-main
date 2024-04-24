@@ -35,7 +35,8 @@ const elements = {
   columnDivs: document.querySelectorAll(".column-div"),
   headerBoardName: document.getElementById("header-board-name"),
   editTaskModal: document.getElementsByClassName("edit-task-modal-window")[0],
-  threeDotsIcon: document.getElementById('three-dots-icon')
+  threeDotsIcon: document.getElementById('three-dots-icon'),
+  logo:document.getElementById('logo')
 };
 
 let activeBoard = "";
@@ -264,7 +265,8 @@ function toggleTheme(show) {
   const isLightTheme = show === "enabled" || show === true || elements.themeSwitch.checked === true;
   document.body.classList.toggle("light-theme", isLightTheme);
   localStorage.setItem("light-theme", (isLightTheme ? "enabled" : "disabled"));
-  console.log(localStorage.getItem("light-theme"))
+  elements.themeSwitch.checked = isLightTheme;
+  elements.logo.src = elements.logo.src.replace(window.location.origin, '.').replace(isLightTheme ? 'dark' : 'light', isLightTheme ? 'light' : 'dark');
 }
 
 
@@ -356,5 +358,8 @@ function init() {
   toggleSidebar(showSidebar);
   const isLightTheme = localStorage.getItem("light-theme") === "enabled";
   toggleTheme(isLightTheme);
+  elements.themeSwitch.checked = isLightTheme;
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
+  elements.themeSwitch.checked = isLightTheme;
+  elements.logo.src = elements.logo.src.replace(window.location.origin, '.').replace(isLightTheme ? 'dark' : 'light', isLightTheme ? 'light' : 'dark');
 }
