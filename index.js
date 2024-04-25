@@ -39,8 +39,10 @@ const elements = {
   sideBar: document.getElementById("side-bar-div"),
  };
 
+//styles of an element 
 document.getElementById("boards-nav-links-div").style.marginTop = "50px";
 document.getElementById("boards-nav-links-div").style.marginBottom = "300px"
+//declare a variable
 let activeBoard = "";
 
 
