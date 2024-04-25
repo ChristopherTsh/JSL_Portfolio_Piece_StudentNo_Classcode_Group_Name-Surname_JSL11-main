@@ -37,9 +37,12 @@ const elements = {
   threeDotsIcon: document.getElementById("three-dots-icon"),
   logo: document.getElementById("logo"),
   sideBar: document.getElementById("side-bar-div"),
-};
+ };
 
+document.getElementById("boards-nav-links-div").style.marginTop = "50px";
+document.getElementById("boards-nav-links-div").style.marginBottom = "300px"
 let activeBoard = "";
+
 
 //function to fetch and display boards and tasks
 function fetchAndDisplayBoardsAndTasks() {
@@ -184,6 +187,7 @@ function setupEventListeners() {
     elements.filterDiv.style.display = "block";
   });
   elements.modalWindow.addEventListener("submit", (event) => {
+    event.preventDefault()
     addTask(event);
   });
 }
@@ -260,6 +264,7 @@ function openEditTaskModal(task) {
   const editTaskTitleInput = document.getElementById("edit-task-title-input"),
     editTaskDescInput = document.getElementById("edit-task-desc-input"),
     editSelectStatus = document.getElementById("edit-select-status");
+    
 
   editTaskTitleInput.value = task.title;
   editTaskDescInput.value = task.description;
@@ -268,22 +273,27 @@ function openEditTaskModal(task) {
   );
   selectStatus.selected = true;
 
-  console.log(elements.editTaskModal);  
+  
   toggleModal(true, elements.editTaskModal); // Show the edit task modal
 
   const saveTaskBtn = document.getElementById("save-task-changes-btn"),
     deleteTaskBtn = document.getElementById("delete-task-btn");
 
-  saveTaskBtn.addEventListener("click", () => {
-    saveTaskChanges(task.id);
+  saveTaskBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    await saveTaskChanges(task.id);
   });
 
-  deleteTaskBtn.addEventListener("click", () => {
+  deleteTaskBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
     deleteTask(task.id);
     toggleModal(false, elements.editTaskModal);
     refreshTasksUI();
   });
 }
+
 // Function to save task changes
 function saveTaskChanges(taskId) {
   // Function to save task changes
@@ -298,7 +308,7 @@ function saveTaskChanges(taskId) {
   const task = {
     id: taskId,
     status: editSelectStatus,
-    input: editTaskDescInput,
+    description: editTaskDescInput,
     title: editTaskTitleInput,
     board: activeBoard,
   };
